@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" width="400" height="100">
+  <defs>
+    <linearGradient id="flame" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ff4500"/>
+      <stop offset="100%" stop-color="#ffd700"/>
+    </linearGradient>
+  </defs>
+  <text x="10" y="68" font-family="Arial, sans-serif" font-size="52" font-weight="bold" fill="#2d5a27">Eco</text>
+  <text x="120" y="68" font-family="Arial, sans-serif" font-size="52" font-weight="bold" fill="url(#flame)">Sentry</text>
+  <text x="270" y="68" font-family="Arial, sans-serif" font-size="14" fill="#666">AI</text>
+  <circle cx="310" cy="50" r="20" fill="none" stroke="#2d5a27" stroke-width="2"/>
+  <path d="M310 38 L310 50 L322 50" fill="none" stroke="#2d5a27" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="310" cy="50" r="4" fill="#ff4500"/>
+</svg>

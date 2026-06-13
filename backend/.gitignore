@@ -1,4 +1,7 @@
-"# Credentials" 
-"*.json" 
-"ee-titasghosh7-*.json" 
-"!requirements.txt" 
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.env
+*.log
