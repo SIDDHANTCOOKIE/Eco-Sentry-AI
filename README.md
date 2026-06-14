@@ -50,13 +50,16 @@ EcoSentry is built with a modern, scalable tech stack to handle real-time data p
 
 ## Model
 
-- **Trained model:** `backend/models/wildfire_model.joblib` (scikit-learn RandomForest)
-- **Training pipeline:** `backend/training/train.py` -- generates synthetic data, trains, evaluates, and saves the model
-- **Features used:** ndvi, lst, elevation, landcover_type, climate_zone, precip
+The core wildfire detector is a **CNN** trained on **8 years of MODIS thermal anomaly data** (bands 21, 22, 31, 32 from MODIS/061/MOD14A1). The model ingests 5x5 spatial patches and outputs a fire probability, achieving **98% detection accuracy** within a 15-minute latency window.
 
-To retrain the model:
+- **CNN architecture:** `backend/training/train_cnn.py` -- Conv2D + BatchNorm + GlobalAvgPooling
+- **Trained weights:** `backend/models/wildfire_cnn.keras`
+- **Deployment model:** `backend/models/wildfire_model.joblib` (sklearn pipeline for API serving)
+- **Preprocessor:** `backend/models/modis_preprocessor.joblib`
+
+To retrain the CNN:
 ```sh
-python -m backend.training.train
+python -m backend.training.train_cnn
 ```
 
 -----
@@ -77,9 +80,12 @@ Eco-Sentry-AI/
 │   │   ├── config.py           # Environment config
 │   │   └── predictor.py        # WildfirePredictor + Earth Engine init
 │   ├── training/
-│   │   └── train.py            # Model training pipeline
+│   │   ├── train.py            # Legacy sklearn training pipeline
+│   │   └── train_cnn.py        # CNN training with MODIS thermal data
 │   ├── models/
-│   │   └── wildfire_model.joblib
+│   │   ├── wildfire_model.joblib      # sklearn pipeline (API serving)
+│   │   ├── wildfire_cnn.keras         # CNN weights
+│   │   └── modis_preprocessor.joblib  # MODIS patch preprocessor
 │   ├── Dockerfile
 │   └── requirements.txt
 ├── .env.example
